@@ -4,3 +4,6 @@
 *.test
 *.swp
 *.gitignore
+/gradle/
+/out/
+.gradle/
