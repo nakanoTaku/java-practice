@@ -8,6 +8,8 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import java.text.ParseException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -22,6 +24,16 @@ public class MemberCertificationTest {
         certification = new MemberCertification();
     }
 
+    static class MapFixture {
+        Map<String, String> value;
+        boolean expected;
+
+        MapFixture(Map<String, String> value, boolean expected) {
+            this.value = value;
+            this.expected = expected;
+        }
+    }
+
     static class Fixture {
         String value; // テストデータ
         boolean expected; // 期待値
@@ -29,6 +41,51 @@ public class MemberCertificationTest {
         Fixture(String value, boolean expected) {
             this.value = value;
             this.expected = expected;
+        }
+    }
+
+    @RunWith(Theories.class)
+    public static class 全ての認証が成功する場合 {
+        @DataPoint
+        public static Map<String, String> value = new LinkedHashMap<String, String>() {
+            {
+                put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
+                put(MemberCertification.CertifiedItems.BIRTH_DATE.getValue(),MemberCertification.EXPECTED_BIRTHDAY);
+                put(MemberCertification.CertifiedItems.NAME.getValue(),MemberCertification.EXPECTED_NAME);
+                put(MemberCertification.CertifiedItems.TEL.getValue(),MemberCertification.EXPECTED_TEL);
+            }
+        };
+        public static MapFixture FIXTURES =
+                new MapFixture(value, true);
+
+        @Theory
+        public void executeAuthentication_認証が成功する場合はtrueが返却される(MapFixture fixture) throws Exception {
+            boolean actual = certification.executeAuthentication(fixture.value);
+            boolean expected = fixture.expected;
+
+            assertThat(actual, is(expected));
+        }
+    }
+
+    public static class 一つでも認証が失敗する場合 {
+        @DataPoints
+        public static Map<String, String> value = new LinkedHashMap<String, String>() {
+            {
+                put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
+                put(MemberCertification.CertifiedItems.BIRTH_DATE.getValue(),MemberCertification.EXPECTED_BIRTHDAY);
+                put(MemberCertification.CertifiedItems.NAME.getValue(),MemberCertification.EXPECTED_NAME);
+                put(MemberCertification.CertifiedItems.TEL.getValue(),"hogehogehoge");
+            }
+        };
+        public static MapFixture FIXTURES =
+                new MapFixture(value, false);
+
+        @Theory
+        public void executeAuthentication_認証が失敗した場合はfalseが返却される(MapFixture fixture) throws Exception {
+            boolean actual = certification.executeAuthentication(fixture.value);
+            boolean expected = fixture.expected;
+
+            assertThat(actual, is(expected));
         }
     }
 
