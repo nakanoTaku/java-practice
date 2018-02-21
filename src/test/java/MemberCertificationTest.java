@@ -1,3 +1,5 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -23,6 +25,8 @@ public class MemberCertificationTest {
     private static final String EXPECTED_NAME_TEST = "大嶋 一哉";
     private static final String EXPECTED_TEL_TEST = "090-1111-2222";
 
+    @AllArgsConstructor
+    @Getter
     private enum CertifiedTestItems {
         MAIL("mail"),
         BIRTH_DATE("birthDate"),
@@ -30,14 +34,6 @@ public class MemberCertificationTest {
         TEL("tel");
 
         private final String value;
-
-        CertifiedTestItems(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
     }
 
 

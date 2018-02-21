@@ -1,3 +1,6 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -11,6 +14,8 @@ public class MemberCertification {
     public static final String EXPECTED_NAME = "大嶋 一哉";
     public static final String EXPECTED_TEL = "090-1111-2222";
 
+    @AllArgsConstructor
+    @Getter
     public enum CertifiedItems {
         MAIL("mail"),
         BIRTH_DATE("birthDate"),
@@ -18,14 +23,6 @@ public class MemberCertification {
         TEL("tel");
 
         private final String value;
-
-        CertifiedItems(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
     }
 
     public static final String AUTHENTICATED = "正しく認証されました。";
