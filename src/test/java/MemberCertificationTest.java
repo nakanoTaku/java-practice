@@ -46,7 +46,6 @@ public class MemberCertificationTest {
 
     @RunWith(Theories.class)
     public static class 全ての認証が成功する場合 {
-        @DataPoint
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
                 put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
@@ -55,6 +54,8 @@ public class MemberCertificationTest {
                 put(MemberCertification.CertifiedItems.TEL.getValue(),MemberCertification.EXPECTED_TEL);
             }
         };
+
+        @DataPoint
         public static MapFixture FIXTURES =
                 new MapFixture(value, true);
 
@@ -67,8 +68,8 @@ public class MemberCertificationTest {
         }
     }
 
+    @RunWith(Theories.class)
     public static class 一つでも認証が失敗する場合 {
-        @DataPoints
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
                 put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
@@ -77,6 +78,8 @@ public class MemberCertificationTest {
                 put(MemberCertification.CertifiedItems.TEL.getValue(),"hogehogehoge");
             }
         };
+
+        @DataPoint
         public static MapFixture FIXTURES =
                 new MapFixture(value, false);
 
