@@ -94,10 +94,10 @@ public class MemberCertificationTest {
     public static class 一つでも認証が失敗する場合 {
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
-                put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
-                put(MemberCertification.CertifiedItems.BIRTH_DATE.getValue(),MemberCertification.EXPECTED_BIRTHDAY);
-                put(MemberCertification.CertifiedItems.NAME.getValue(),MemberCertification.EXPECTED_NAME);
-                put(MemberCertification.CertifiedItems.TEL.getValue(),"hogehogehoge");
+                put(CertifiedTestItems.MAIL.getValue(),EXPECTED_EMAIL_TEST);
+                put(CertifiedTestItems.BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
+                put(CertifiedTestItems.NAME.getValue(),EXPECTED_NAME_TEST);
+                put(CertifiedTestItems.TEL.getValue(),"hogehogehoge");
             }
         };
 
