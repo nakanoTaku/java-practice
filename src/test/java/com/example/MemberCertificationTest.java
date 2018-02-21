@@ -1,3 +1,5 @@
+package com.example;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.example.MemberCertificationTest.CertifiedTestItems.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -27,7 +30,7 @@ public class MemberCertificationTest {
 
     @AllArgsConstructor
     @Getter
-    private enum CertifiedTestItems {
+    enum CertifiedTestItems {
         MAIL("mail"),
         BIRTH_DATE("birthDate"),
         NAME("name"),
@@ -66,10 +69,10 @@ public class MemberCertificationTest {
     public static class 全ての認証が成功する場合 {
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
-                put(CertifiedTestItems.MAIL.getValue(),EXPECTED_EMAIL_TEST);
-                put(CertifiedTestItems.BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
-                put(CertifiedTestItems.NAME.getValue(),EXPECTED_NAME_TEST);
-                put(CertifiedTestItems.TEL.getValue(),EXPECTED_TEL_TEST);
+                put(MAIL.getValue(),EXPECTED_EMAIL_TEST);
+                put(BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
+                put(NAME.getValue(),EXPECTED_NAME_TEST);
+                put(TEL.getValue(),EXPECTED_TEL_TEST);
             }
         };
 
@@ -90,10 +93,10 @@ public class MemberCertificationTest {
     public static class 一つでも認証が失敗する場合 {
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
-                put(CertifiedTestItems.MAIL.getValue(),EXPECTED_EMAIL_TEST);
-                put(CertifiedTestItems.BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
-                put(CertifiedTestItems.NAME.getValue(),EXPECTED_NAME_TEST);
-                put(CertifiedTestItems.TEL.getValue(),"hogehogehoge");
+                put(MAIL.getValue(),EXPECTED_EMAIL_TEST);
+                put(BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
+                put(NAME.getValue(),EXPECTED_NAME_TEST);
+                put(TEL.getValue(),"hogehogehoge");
             }
         };
 

@@ -1,3 +1,5 @@
+package com.example;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,6 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static com.example.MemberCertification.CertifiedItems.*;
+
 public class MemberCertification {
     public static final String EXPECTED_EMAIL = "oshima@gmail.com";
     public static final String EXPECTED_BIRTHDAY = "1990/01/01";
@@ -17,6 +21,7 @@ public class MemberCertification {
     @AllArgsConstructor
     @Getter
     public enum CertifiedItems {
+
         MAIL("mail"),
         BIRTH_DATE("birthDate"),
         NAME("name"),
@@ -30,10 +35,10 @@ public class MemberCertification {
 
     private static Map<String, String> messages = new LinkedHashMap<String, String>() {
         {
-            put(CertifiedItems.MAIL.getValue(),"メールアドレスを入力してください。");
-            put(CertifiedItems.BIRTH_DATE.getValue(),"生年月日を入力してください。");
-            put(CertifiedItems.NAME.getValue(),"名前を入力してください。");
-            put(CertifiedItems.TEL.getValue(),"電話番号を入力してください。");
+            put(MAIL.getValue(),"メールアドレスを入力してください。");
+            put(BIRTH_DATE.getValue(),"生年月日を入力してください。");
+            put(NAME.getValue(),"名前を入力してください。");
+            put(TEL.getValue(),"電話番号を入力してください。");
         }
     };
 
@@ -56,10 +61,10 @@ public class MemberCertification {
 
     public static boolean executeAuthentication(Map<String, String> input) throws ParseException {
         Boolean[] results = {
-                checkEmail(input.get(CertifiedItems.MAIL.getValue())),
-                checkBirthday(input.get(CertifiedItems.BIRTH_DATE.getValue())),
-                checkName(input.get(CertifiedItems.NAME.getValue())),
-                checkTel(input.get(CertifiedItems.TEL.getValue()))
+                checkEmail(input.get(MAIL.getValue())),
+                checkBirthday(input.get(BIRTH_DATE.getValue())),
+                checkName(input.get(NAME.getValue())),
+                checkTel(input.get(TEL.getValue()))
         };
         return Arrays.stream(results).allMatch(Boolean::valueOf);
     }
