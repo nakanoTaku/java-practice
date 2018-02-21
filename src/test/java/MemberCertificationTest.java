@@ -18,6 +18,28 @@ import static org.junit.Assert.assertThat;
 public class MemberCertificationTest {
 
     private static MemberCertification certification;
+    private static final String EXPECTED_EMAIL_TEST = "oshima@gmail.com";
+    private static final String EXPECTED_BIRTHDAY_TEST = "1990/01/01";
+    private static final String EXPECTED_NAME_TEST = "大嶋 一哉";
+    private static final String EXPECTED_TEL_TEST = "090-1111-2222";
+
+    private enum CertifiedTestItems {
+        MAIL("mail"),
+        BIRTH_DATE("birthDate"),
+        NAME("name"),
+        TEL("tel");
+
+        private final String value;
+
+        CertifiedTestItems(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return this.value;
+        }
+    }
+
 
     @Before
     public void setUp() {
@@ -25,8 +47,8 @@ public class MemberCertificationTest {
     }
 
     static class MapFixture {
-        Map<String, String> value;
-        boolean expected;
+        Map<String, String> value; // テストデータ
+        boolean expected; // 期待値
 
         MapFixture(Map<String, String> value, boolean expected) {
             this.value = value;
@@ -48,10 +70,10 @@ public class MemberCertificationTest {
     public static class 全ての認証が成功する場合 {
         public static Map<String, String> value = new LinkedHashMap<String, String>() {
             {
-                put(MemberCertification.CertifiedItems.MAIL.getValue(),MemberCertification.EXPECTED_EMAIL);
-                put(MemberCertification.CertifiedItems.BIRTH_DATE.getValue(),MemberCertification.EXPECTED_BIRTHDAY);
-                put(MemberCertification.CertifiedItems.NAME.getValue(),MemberCertification.EXPECTED_NAME);
-                put(MemberCertification.CertifiedItems.TEL.getValue(),MemberCertification.EXPECTED_TEL);
+                put(CertifiedTestItems.MAIL.getValue(),EXPECTED_EMAIL_TEST);
+                put(CertifiedTestItems.BIRTH_DATE.getValue(),EXPECTED_BIRTHDAY_TEST);
+                put(CertifiedTestItems.NAME.getValue(),EXPECTED_NAME_TEST);
+                put(CertifiedTestItems.TEL.getValue(),EXPECTED_TEL_TEST);
             }
         };
 
